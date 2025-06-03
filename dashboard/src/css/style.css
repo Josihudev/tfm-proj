@@ -1,0 +1,38 @@
+html,body{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-family: sans-serif;
+	background: #f3f3f3;
+}
+
+#map{
+	width: 93%;
+	height: 80%;
+	/* Centra al mig*/
+	position: fixed;
+	left:50%;
+	transform: translateX(-50%);
+
+	margin: 6rem 0rem;
+	border: 2px solid #ccc;
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+    
+
+.highlight-red{
+	border: 2px solid red;
+}
+
+.red-text{
+	color: red;
+	font-weight: bold;
+}
+
+.green-color{
+	color: green;      
+}
+
+.blue-color{
+	color: blue;      
+}

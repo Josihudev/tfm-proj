@@ -1,0 +1,347 @@
+
+.inter-menu{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 300px;
+    background-color: #f1eeee;
+    padding: 1rem;
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (max-width: 769px){
+    .inter-menu{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 150px;
+        background-color: #f1eeee;
+        padding: 1rem;
+        overflow-y: auto;
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+/* Inicialitza tancat */
+.inter-menu.left{
+    left: 0;
+    transform: translateX(-100%);
+}
+  
+.inter-menu.right{
+    right: 0;
+    transform: translateX(100%);
+}
+
+/* Menú és visible */
+.inter-menu.open.left,
+.inter-menu.open.right{
+	transform: translateX(0);
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* Menú és visible - responsive*/
+@media (max-width: 769px){
+    .inter-menu.open.left,
+    .inter-menu.open.right{
+		transform: translateX(0);
+		opacity: 0.8; /* una mica transparent quan està en tauleta*/
+		pointer-events: auto;
+    }
+}
+
+/* Títol del menús*/
+.inter-menu h3{
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #333;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5rem;
+}
+  
+/* Opcions dels menús*/
+.menu-option{
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+  
+.delete-bomber:hover{
+	color: red;
+	transform: scale(1.2);
+	transition: 0.2s;
+}
+
+#bombersContainer .menu-option{
+	margin-top: 12px;  
+	margin-bottom: 12px;
+	padding: 8px;
+	background: #f9f9f9;
+	border-radius: 8px;
+}
+
+#bombersContainer .menu-option button{
+    background-color: #ddd;
+    border: 1px solid #c0c0c0;
+    color: #333;
+    padding: 1.2rem 2.0rem; 
+    font-size: 1.3rem;     
+    border-radius: 5px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    cursor: pointer;
+    transition: all 0.3s ease; 
+}
+
+#bombersContainer .menu-option button:hover{
+    background: linear-gradient(to bottom, #e0e0e0, #d0d0d0); 
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); 
+    transform: translateY(-2px); 
+    
+}
+
+#bombersContainer .menu-option button:active {
+    background: #d0d0d0; 
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); 
+    transform: translateY(0); 
+}
+
+.elapsed-timer{
+    border: 0px;
+    width: max-content;
+}
+
+.menu-option {
+	padding: 1rem;
+	background-color: #ffffff;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	margin-bottom: 1rem;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.bomber-header {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+
+.bomber-avatar {
+	width: 48px;
+	height: 48px;
+}
+
+.bomber-avatar.small {
+	display: none; 
+	width: 32px;
+	height: 32px;
+}
+
+.bomber-info {
+	display: flex;
+	flex-direction: column;
+}
+
+.bomber-name {
+	font-weight: bold;
+	margin: 0;
+}
+
+.bomber-id {
+	margin: 0;
+	font-size: 0.9rem;
+	color: #555;
+}
+
+/* Responsive*/
+@media (max-width: 600px) {
+  .bomber-header {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+  }
+
+  .bomber-avatar.large {
+    	display: none;
+  }
+
+  .bomber-avatar.small {
+    	display: block;
+  }
+}
+
+.bomber-status {
+	display: flex;
+	flex-wrap: wrap; 
+	justify-content: flex-start; 
+	align-items: flex-start;
+	padding: 1rem;
+	border: 2px solid #007acc;
+	border-radius: 12px;
+	background-color: #f9f9f9;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+
+.status-row {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.5rem 1rem;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.status-row img {
+	width: 32px;
+	height: 32px;
+}
+
+.status-row span {
+  	font-size: 1.1rem;
+  	font-weight: 500;  
+}
+
+@media (max-width: 600px) {
+  	.bomber-status {
+    	flex-direction: column;
+    	align-items: flex-start;
+  	}
+
+  	.status-row {
+    	width: 80%;
+    	justify-content: flex-start;
+  	}
+}
+
+/* Temporitzador */
+.bomber-timer {
+  	margin: 0.75rem 0;
+}
+
+.elapsed-timer {
+	font-size: 1.1rem;
+	padding: 0.4rem 0.6rem;
+	width: 100%;
+	text-align: center;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background-color: #f8f8f8;
+}
+
+/* Botons i checkbox */
+.bomber-controls {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-top: 1rem;
+	flex-wrap: wrap;
+}
+
+.tracking-toggle {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	background-color: #0055aa;
+	color: white;
+	border: none;
+	padding: 0.6rem 1rem;
+	font-size: 1rem;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.tracking-toggle:hover {
+  	background-color: #003f7d;
+}
+
+.tracking-toggle img {
+	width: 24px;
+	height: 24px;
+}
+
+/* Contenidor del checkbox i label */
+.tracking-checkbox {
+    display: flex; 
+    align-items: center; 
+    gap: 0.5rem; 
+    margin-bottom: 1rem; 
+}
+
+.tracking-checkbox label {
+    font-size: 1.2rem; 
+    color: #333; 
+    cursor: pointer; 
+}
+
+.tracking-checkbox input[type="checkbox"] {
+    width: 1.5rem;  
+    height: 1.5rem; 
+    appearance: none; 
+    -webkit-appearance: none;
+    border: 2px solid #666; 
+    border-radius: 4px; 
+    background-color: #fff; 
+    cursor: pointer;
+    position: relative;
+    outline: none; 
+}
+
+.tracking-checkbox input[type="checkbox"]:checked {
+    background-color: #007bff; 
+    border-color: #007bff; 
+}
+
+.tracking-checkbox input[type="checkbox"]:checked::before {
+    content: ''; 
+    display: block;
+    width: 0.6rem; 
+    height: 1rem; 
+    border: solid #fff; 
+    border-width: 0 3px 3px 0; 
+    transform: rotate(45deg); 
+    position: absolute;
+    top: 0.1rem; 
+    left: 0.4rem; 
+}
+
+.tracking-checkbox input[type="checkbox"]:focus {
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); 
+}
+
+.bomber-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.bomber-topbar .delete-bomber {
+  font-size: 1.2rem;
+  color: #d33;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.bomber-topbar .delete-bomber:hover {
+  transform: scale(1.2);
+  color: #a00;
+}
+
+.timer-label{
+    padding-top:20px;    
+}

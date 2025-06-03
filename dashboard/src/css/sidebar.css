@@ -1,0 +1,136 @@
+/* Menú lateral Opcions */
+
+.side-menu{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 300px;
+    background-color: #f1eeee;
+    padding: 1rem;
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (max-width: 769px){
+    .side-menu{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 150px;
+        background-color: #f1eeee;
+        padding: 1rem;
+        overflow-y: auto;
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+    }
+}       
+
+/* Inicialitza tancat */
+.side-menu.left{
+    left: 0;
+    transform: translateX(-100%);
+}
+  
+.side-menu.right{
+    right: 0;
+    transform: translateX(100%);
+}
+
+/* Menú és visible */
+.side-menu.open.left,
+.side-menu.open.right{
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Menú és visible */
+@media (max-width: 769px){
+    .side-menu.open.left,
+    .side-menu.open.right{
+    transform: translateX(0);
+    opacity: 0.8; /* una mica transparent quan està en tauleta*/
+    pointer-events: auto;
+    }
+}
+
+/* Títol del menús*/
+.side-menu h3{
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #333;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5rem;
+}
+  
+/* Opcions dels menús*/
+.menu-option-left{
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Títol dins del submenú */
+.menu-option-left p {
+    background-color: #003366; /* blau fosc */
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    margin: -0.75rem -1rem 0.75rem -1rem;
+    border-radius: 6px 6px 0 0;
+    font-size: 1rem;
+}
+
+/* Botons */
+.menu-option-left button {
+    background-color: #0055aa;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 0.5rem;
+}
+
+.menu-option-left button:hover {
+    background-color: #003f7d;
+}
+
+/* Contenidor input i botó */
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Inputs numèrics */
+.menu-option-left input[type="number"] {
+    width: 80px; /* suficient per mostrar fins 3 dígits */
+    padding: 0.4rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: right;
+}
+
+/* Select Posició*/
+.menu-option-left select {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-top: 0.5rem;
+    background-color: #fff;
+}

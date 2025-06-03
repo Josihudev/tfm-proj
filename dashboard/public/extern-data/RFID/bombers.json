@@ -1,0 +1,19 @@
+{
+    "bombers":[
+        {
+            "id_bomber":"C1280",
+            "kml_origin":"1",
+            "nom_bomber":"ALDOMÀ, ROC",
+            "id_oxigen":"OXI003",
+            "id_smartwatch":"REL009"
+        },
+        {
+
+            "id_bomber":"B232",
+            "kml_origin":"2",
+            "nom_bomber":"BOLET, XAVIER",
+            "id_oxigen":"OXI001",
+            "id_smartwatch":"REL004"
+        }
+    ]
+}

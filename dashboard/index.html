@@ -1,29 +1,140 @@
 <!DOCTYPE html>
 <html lang="ca">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="https://openlayers.org/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Bombers</title>
-  </head>
-  <body>
-    <div style="padding: 1rem">
-      <button id="toggleTracking">Inicia Seguiment</button>
-      <label for="speedSelect">Velocitat:</label>
-      <select id="speedSelect">
-        <option value="5000">Lent(5s)</option>
-        <option value="2000" selected>Normal(2s)</option>
-        <option value="1000">Ràpid(1s)</option>
-      </select>
-      <span id="timeElapsed">0s</span>      
-    </div>
-    <div style="padding: 1rem">
-      <input type="checkbox" id="unityAFollow" name="capa1" value="Rastreig1" checked>
-      <label for="unityAFollow">Línia de reastreig Unitat A</label>
-    </div>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="src/icons/fire-flame-curved-solid.svg"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Dashboard Bombers</title>        
+	</head>
+	<body>
+		<!-- Pestanya per mostrar/ocultar la barra del menú superior -->
+		<div id="toggleTab" class="toggle-tab"><i class="fas fa-chevron-up"></i></div>
 
-    <div id="map"></div>
+		<!-- Botons menú superior -->
+		<div id="topBar" class="top-bar">
+			<p><strong>Dashboard Bombers &nbsp;<i class="fa-solid fa-fire-flame-curved"></i></strong></p>
+			<div class="top-buttons">
+				<button id="toggleMenuOptionsBtn" class="menu-toggle-btn" title="Opcions"><i class="fas fa-sliders-h"></i></button>
+				<button id="addMarkerBtn" class="menu-toggle-btn" title="Marcadors mapa"><i class="fas fa-thumbtack"></i></button>
+				<button id="importDataBtn" class="menu-toggle-btn" title="Afegir bomber"><i class="fas fa-user-plus"></i></button>
+				<button id="toggleMenuMapBtn" class="menu-toggle-btn" title="Control de la intervenció"><i class="fas fa-fire-extinguisher"></i></button>				
+			</div>
+		</div>
 
-    <script type="module" src="/js/main.js"></script>
-  </body>
+    	<!-- Menú Opcions (esquerra)-->
+    	<div id="controlOptions" class="side-menu left">
+			<span id="closeMenuOptions" class="close">&times;</span>
+      		<h3>Opcions</h3>
+      		
+			<!-- Setejar l'alarma pels BOmbers a l'interior de l'edifici-->
+			<div class="menu-option-left">				
+				<p>Alarma Bomber (temps màx.)</p>
+				<div class="input-container">
+					<input type="number" id="minutsInput" min="1" max="99" value="1"> 
+					<span>minuts</span>
+					<button id="minutsInputBtn">Acceptar</button>
+				</div>				
+				<!-- Llegirem els minuts d'aquest input text ocult-->
+				<input type="hidden" id="minutsInputSet" value="1" />
+			</div>
+
+			<!-- Setejar l'alarma bombones oxígen-->
+			<div class="menu-option-left">				
+				<p>Alarma Oxígen (% mín.)</p>
+				<div class="input-container">
+					<input type="number" id="oxigenInput" min="0" max="100" value="50">
+					<span>%</span>
+					<button id="oxigenInputBtn">Acceptar</button>
+				</div>				
+				<!-- Llegirem els minuts d'aquest input text ocult-->
+				<input type="hidden" id="oxigenInputSet" value="50" />
+			</div>
+			
+			<!-- Setejar l'alarma dels batecs per minut del bomber-->
+			<div class="menu-option-left">				
+				<p>Alarma BPM (b.p.m. màx.)</p>
+				<div class="input-container">
+					<input type="number" id="bpmInput" min="60" max="210" value="130">
+					<span>bpm</span>
+					<button id="bpmInputBtn">Acceptar</button>
+				</div>				
+				<!-- Llegirem els minuts d'aquest input text ocult-->
+				<input type="hidden" id="bpmInputSet" value="130" />
+			</div>
+
+			<!-- Selector per triar en quin costat veure el menú del Mapa-->
+			<div class="menu-option-left">
+				<label for="positionSelect"><strong>Posició Controls de la Intervenció</strong></label>
+				<select id="positionSelect">
+				<option value="right" selected>Dreta</option>
+				<option value="left">Esquerra</option>
+				</select>
+			</div>
+		</div>
+
+    	<!-- Menú Mapa (dreta)-->
+    	<div id="controlMap" class="inter-menu right">
+			<span id="closeMenuIntervencio" class="close">&times;</span>			
+      		<h3>Controls de la Intervenció</h3>
+      		<!-- Aquí es pintarà la interfície dels bombers carregats -->
+      		<div id="bombersContainer"></div>
+    	</div>
+
+    	<!-- div pel mapa (target al crear el new Map) -->
+    	<div id="map"></div>
+  
+		<!-- Overlay per bloquejar la pantalla -->
+		<div id="overlayid" class="overlay" tabindex="-1"></div>
+
+    	<!-- Modal per importar dades dels bombers -->
+		<div id="importModal" class="modal hidden">
+			<div class="modalContent">
+				<span id="closeImportModal" class="close">&times;</span>
+				<h2>Afegir bomber</h2>
+				<label for="modalFileSelect">Llegint RFID ...</label>
+				<select id="modalFileSelect">
+				<!-- Les opcions es generen dinàmicament a bomberIntegration.js -->
+				<!-- <option value="">-- Selecciona bomber --</option> -->				
+				</select>
+			</div>
+		</div>    
+		
+		<!-- Modal Selecció de Marcadors Sobre el Mapa -->
+		<div id="markerModal" class="modal hidden">
+			<div class="modalContentMM">
+				<span id="closeModalMarker" class="close">&times;</span>			
+				<h2>Marcadors mapa:</h2>
+				<!-- Marcadors-->
+			  	<div id="contenidorBots">
+					<button data-icon="src/icons/flame.png" class="btn btn-mar" title="Foc" style="background-image: url('src/icons/flame.png');">
+						<span>Foc</span>
+					</button>
+
+					<button data-icon="src/icons/victims.png" class="btn btn-mar" title="Víctimes" style="background-image: url('src/icons/victims.png');">
+						<span>Víctimes</span>
+					</button>
+
+					<button data-icon="src/icons/danger.png" class="btn btn-mar" title="Matèries Perilloses" style="background-image: url('src/icons/danger.png');">
+						<span>M.Perilloses</span>
+					</button>
+
+					<button data-icon="src/icons/biological.png" class="btn btn-mar" title="Material Biològic" style="background-image: url('src/icons/biological.png');">
+						<span>Mat.Biològic</span>
+					</button>
+
+					<button data-icon="src/icons/victimsconf.png" class="btn btn-mar" title="Víctimes Confinades" style="background-image: url('src/icons/victimsconf.png');">
+						<span>Víct.Confinades</span>
+					</button>
+
+					<button data-icon="src/icons/gas.png" class="btn btn-mar" title="Gas" style="background-image: url('src/icons/gas.png');">
+						<span>Gas</span>
+					</button>					
+				</div>
+			</div>
+		</div>
+
+		<!-- Carrega tots els js des del main-->
+		<script type="module" src="../src/js/main.js"></script>
+  	</body>
 </html>

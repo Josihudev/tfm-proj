@@ -1,5 +1,5 @@
 // Mòdul Tracker
-// Comments: Dibuixa un bomber sobre un mapa i el seu moviment
+// Dibuixa un bomber i el seu moviment sobre el mapa 
 
 import { fromLonLat } from 'ol/proj';
 import { Vector as VectorLayer } from 'ol/layer';
@@ -33,7 +33,7 @@ export function createTracker({ map, iconUrl, color, name }){
             scale: 0.05,
         }),
 
-        text: new Text({  // Per mostrar el nom del bomber damunt del punter
+        text: new Text({  // Mostrar el nom del bomber damunt del punter
             text: name || '',              // Mostrar nom bomber si està definit
             offsetY: -25,                  // Text sobre la icona
             font: '14px Calibri,sans-serif',
@@ -55,22 +55,25 @@ export function createTracker({ map, iconUrl, color, name }){
         const longitude = parseFloat(position.longitude);
         const latitude = parseFloat(position.latitude);
 
-        if (typeof latitude !== 'number' || typeof longitude !== 'number') return;
+        if(typeof latitude !== 'number' || typeof longitude !== 'number'){
+            return;
+        } 
 
         const newCoord = fromLonLat([longitude, latitude]);
 
-        
-        if (!initialized){
+        if(!initialized){
             iconFeature.getGeometry().setCoordinates(newCoord);
             currentCoord = newCoord;
             initialized = true;
-        } else {
+        } 
+        else{
             targetCoord = newCoord;
             animateMove();
         }
+        console.log("update:", { currentCoord, newCoord });
     }
 
-    function animateMove(duration = 1000){ // Referència: https://www.w3schools.com/jsref/met_win_requestanimationframe.asp
+    function animateMove(duration = 1500){ // Referència: https://www.w3schools.com/jsref/met_win_requestanimationframe.asp
         
         if(!currentCoord || !targetCoord){
             return; 
@@ -114,6 +117,6 @@ export function createTracker({ map, iconUrl, color, name }){
         setLineVisible,        
         iconLayer: vectorLayer,
         lineLayer: lineLayer,
-        getColor: () => color  // X accedir directament al color del tracker
+        getColor: () => color  // Per accedir directament al color del tracker
     };
 }

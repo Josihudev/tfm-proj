@@ -1,4 +1,4 @@
-// Mòdul MAPA ONPENLAYERS 
+// Mòdul Mapa interactiu amb OpenLayers
 // Paràmetre entrada: Posició inicial per situar el punter sobre el mapa.
 // Retorna: new Map
 

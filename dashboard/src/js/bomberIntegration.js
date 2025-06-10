@@ -47,6 +47,8 @@ export function initImportModal({
             }
 
             // Reinicia la simulació de l'API abans de crear el Bomber
+            console.log('data:', JSON.stringify(data));
+            console.log('data.kml_origin:', data.kml_origin);
             resetSimulation(data.id_bomber, data.kml_origin);
             
             createFullBomberUnit({
@@ -58,7 +60,7 @@ export function initImportModal({
     // Crea i afegeix la interfície del bomber
     // Inicialitza el seu tracker
     // Connecta la bombona
-    // Connecta el monitor del ritme cardíac
+    // Connecta el monitor BPM's
     // Gestiona la seva eliminació 
     function createFullBomberUnit({ 
         data,
@@ -148,7 +150,7 @@ export function initImportModal({
             }
         });
 
-         // Associa bombona al tracker
+         // Associa BPM's al tracker
         tracker.health = beatsPerMinute;
 
         // Botons i interfície
@@ -165,7 +167,7 @@ export function initImportModal({
         label.appendChild(elements.timerElement);
         bomberDiv.appendChild(label); 
         
-        // Interval automàtic de seguiment (sense toggle)
+        // Interval automàtic de seguiment 
         const intervalId = setInterval(async()=>{
             try {
                 const { bpm, oxigen, position } = await fetchBomberStatus({ idBomber: data.id_bomber, originData: data.kml_origin });

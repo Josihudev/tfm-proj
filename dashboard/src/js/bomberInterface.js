@@ -2,7 +2,7 @@
 
 export function createBomberInterface({bomber, container, minutsInputSet,  onDelete, allTrackers }){
   
-    // Creem div al menú lateral per mostrar les dades importades del BOMBERS
+    // Crea div al menú lateral per mostrar les dades importades del bomber
     const bomberDiv = document.createElement('div');
     
     bomberDiv.classList.add('menu-option');
@@ -67,8 +67,6 @@ export function createBomberInterface({bomber, container, minutsInputSet,  onDel
             }
         } 
         else{
-            // Inicialitza a 0 pq al pausar no peti
-
             // Al fer click es canvia el color de les icones
             bomberDiv.querySelector('.stop-timer').classList.remove('blue-color');
             bomberDiv.querySelector('.stop-timer').classList.add('green-color');
@@ -77,9 +75,9 @@ export function createBomberInterface({bomber, container, minutsInputSet,  onDel
             tracker.timerIntervalId = setInterval(() => {
                 tracker.elapsedTime += 1;
 
-                if (timeDisplay){
+                if(timeDisplay){
                     timeDisplay.textContent = `${tracker.elapsedTime}s`;
-                    if (tracker.elapsedTime >= alarmTime){
+                    if(tracker.elapsedTime >= alarmTime){
                         timeDisplay.classList.add('red-text');
                     }
                 }

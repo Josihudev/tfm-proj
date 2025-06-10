@@ -1,3 +1,12 @@
+# 2a versió (10/06/2025)
+Correccions comentaris.
+Correcció marcar en vermell quan es seteja una alarma.
+
+
+# 1a versió (03/06/2025)
+Pujada general projecte
+
+
 # OpenLayers + Vite
 
 This example demonstrates how the `ol` package can be used with [Vite](https://vitejs.dev/).
@@ -17,5 +26,3 @@ To generate a build ready for production:
 
 Then deploy the contents of the `dist` directory to your server.  You can also run `npm run serve` to serve the results of the `dist` directory for preview.
 
-
-# Reordenament carpetes projecte

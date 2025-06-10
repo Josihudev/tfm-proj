@@ -1,6 +1,9 @@
+// Client per connectar amb l'API
+
+// Obtenir dades bomber
 export async function fetchBomberStatus({ idBomber, originData }){
 
-    const res = await fetch('http://localhost/api-rest/index.php?id_bomber=${idBomber}&origin_data=${originData}', {
+    const res = await fetch(`http://localhost/api-rest/index.php?id_bomber=${idBomber}&origin_data=${originData}`, {
     
         credentials: 'include',
         headers:{
@@ -21,9 +24,12 @@ export async function fetchBomberStatus({ idBomber, originData }){
     };
 }
 
+// Reiniciar sessió bomber
 export async function resetSimulation( idBomber, originData){
+
+    console.log("originData:",originData);
     try{
-        await fetch('http://localhost/api-rest/index.php?id_bomber=${idBomber}&origin_data=${originData}&reset=1', {
+        const res = await fetch(`http://localhost/api-rest/index.php?id_bomber=${idBomber}&origin_data=${originData}&reset=1`, {
       
             credentials: 'include'
         });

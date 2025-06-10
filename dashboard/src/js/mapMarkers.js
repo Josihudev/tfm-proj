@@ -1,3 +1,4 @@
+// Marcadors sobre el mapa
 import { Feature } from 'ol';
 import { Point } from 'ol/geom';
 import VectorSource from 'ol/source/Vector';
@@ -8,14 +9,14 @@ import Translate from 'ol/interaction/Translate'; // Per moure els marcadors
 import { closeAllMenus } from './topbar';
 
 
-export function initMapMarkers({map}) {
+export function initMapMarkers({map}){
 
-    // Capa per afegir les icones d'incidents
+    // Capa per afegir les icones 
     const incidentSource = new VectorSource();
     const incidentLayer = new VectorLayer({ source: incidentSource });
     map.addLayer(incidentLayer);
 
-    // Mou els marcadors (arrastrant-los amb el punter- o amb el dit)
+    // Mou els marcadors (arrastrant-los amb el punter o amb el dit)
     const translate = new Translate({
         features: incidentSource.getFeaturesCollection()
     });
@@ -47,7 +48,7 @@ export function initMapMarkers({map}) {
             modal.classList.remove('active');        
         });
          
-        // Escollir icona i esperar clic sobre el mapa
+        // Triar icona i esperar clic sobre el mapa
         modal.querySelectorAll('button[data-icon]').forEach(btn =>{
             btn.addEventListener('click', () => {
                 selectedIconUrl = btn.getAttribute('data-icon');
@@ -59,7 +60,7 @@ export function initMapMarkers({map}) {
         });
 
         // Clic sobre al mapa
-        map.on('click', function(evt) {
+        map.on('click', function(evt){
             
             if(!placingIcon || !selectedIconUrl){
                 return;
@@ -102,7 +103,7 @@ export function initMapMarkers({map}) {
         // Eliminar marcador amb un clic llarg (per tauletes)
         let touchTimer = null;
 
-        map.getViewport().addEventListener('touchstart', function(evt) {
+        map.getViewport().addEventListener('touchstart', function(evt){
             if(evt.touches.length !== 1){
                 return;
             }
@@ -110,19 +111,19 @@ export function initMapMarkers({map}) {
             const touch = evt.touches[0];
             const pixel = map.getEventPixel(touch);
 
-            touchTimer = setTimeout(() => {
+            touchTimer = setTimeout(()=>{
 
                 const feature = map.forEachFeatureAtPixel(pixel, function(feature){ // Retorna la primera feature que troba al pixel clicat
                     return feature;
                 });
 
-                if (feature && incidentSource.hasFeature(feature)) {
+                if(feature && incidentSource.hasFeature(feature)){
                     incidentSource.removeFeature(feature);
                 }
             }, 600); // Clic llarg = 600ms
         });
 
-        map.getViewport().addEventListener('touchend', function() {
+        map.getViewport().addEventListener('touchend', function(){
             clearTimeout(touchTimer);
         });
 
@@ -134,7 +135,8 @@ export function initMapMarkers({map}) {
     };
 }
 
-export function clearMapMarkers() {
+// Eliminar tots els marcadors
+export function clearMapMarkers(){
     const incidentLayers = map.getLayers().getArray().filter(layer => {
         return layer instanceof VectorLayer && layer.getSource() instanceof VectorSource;
     });

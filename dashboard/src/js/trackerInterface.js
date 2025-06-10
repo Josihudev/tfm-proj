@@ -1,3 +1,4 @@
+// Interfície del tracker pel bomber
 export function createTrackerInterface({ bomber, map, createTracker, container, minutsInputSet }){
 
     // Color del tracker
@@ -16,15 +17,15 @@ export function createTrackerInterface({ bomber, map, createTracker, container, 
 
     console.log(container);
 
-    // Pinta el div del bomber del mateix color que el traacker
+    // Pinta el div del bomber del mateix color que el tracker
     const bomberCont = document.getElementById(`bomber-${bomber.id_bomber}`);
     
     bomberCont.style.border = `4px solid ${color}`; // Mateix color que el tracker
-    bomberCont.style.borderRadius = '8px';         // Cantonades arrodonides (opcional)
-    bomberCont.style.padding = '10px';             // Espai intern (opcional)
-    bomberCont.style.marginBottom = '10px';        // Separació entre elements (opcional)
+    bomberCont.style.borderRadius = '8px';         
+    bomberCont.style.padding = '10px';             
+    bomberCont.style.marginBottom = '10px';        
 
-    // Div i botó de seguiment (només mostra/amaga)
+    // Botó mostrar/amagar seguiment 
     const trackingBtn = document.createElement('button');
     trackingBtn.classList.add("tracking-toggle");
     trackingBtn.innerHTML = `
@@ -38,7 +39,7 @@ export function createTrackerInterface({ bomber, map, createTracker, container, 
         tracker.lineLayer.setVisible(isVisible);
         
         const img = this.querySelector('img');
-        if (isVisible){
+        if(isVisible){
             img.src = "src/icons/hide_32.png"; // Canvia la imatge a 'hide'
             img.alt = 'Amaga Seguiment';            
         } 
@@ -100,7 +101,7 @@ export function createTrackerInterface({ bomber, map, createTracker, container, 
             elapsedTime++;
             timeElapsedDiv.textContent = `${elapsedTime}s`;
 
-            if (elapsedTime >= alarmTime){
+            if(elapsedTime >= alarmTime){
                 timeElapsedDiv.classList.add('red-text');
             }
             // Guardem el temps dins del tracker    

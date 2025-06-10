@@ -33,11 +33,10 @@ export function setupImportModal({onOpen, onSelectBomber}){
                 onSelectBomber(parseInt(selectedIndex));
                 // Tanca modal i treu capa d'overlay
                 importModal.classList.add('hidden');
-
                 importModal.classList.remove('active');           
                 overlay.classList.remove('active');
 
-                // Obre el menú de la intervenció per mostrar el bomber triat
+                // Obra el menú de la intervenció per mostrar el bomber triat
                 openMenu("intervencio");;
             }
         });

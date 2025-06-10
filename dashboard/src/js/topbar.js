@@ -1,3 +1,4 @@
+// Menú superior
 export function initTopbar(){
 
     document.addEventListener('DOMContentLoaded', ()=>{
@@ -13,13 +14,13 @@ export function initTopbar(){
         let menuMap = false;
         let menuOptions = false;
 
-        // Botó - Menú Mapa (dreta)
+        // Botó - Menú Control Intervenció (dreta)
         toggleMenuMapBtn.addEventListener('click', ()=>{
 
             menuMap = !menuMap;            
             toggleMenuMapBtn.classList.add('rotating');
 
-            // Tanca el menuOptions si està obert
+            // Tanca el menu Opcions si està obert
             if(menuOptions){
                 menuOptions = false;
                 controlOptions.classList.remove('open');
@@ -33,7 +34,7 @@ export function initTopbar(){
                 iconMap.classList.toggle('fa-bars', !menuMap);
                 iconMap.classList.toggle('fa-times', menuMap);
                 toggleMenuMapBtn.classList.remove('rotating');
-            }, 150); // temps transició
+            }, 150); 
 
             controlMap.classList.toggle('open', menuMap);
             iconMap.classList.toggle('fa-bars', !menuMap);
@@ -45,7 +46,7 @@ export function initTopbar(){
             menuOptions = !menuOptions;
             toggleMenuOptionsBtn.classList.add('rotating');
         
-            // Tanca el Menú del mapa si està obert
+            // Tanca el Menú del Control de la Intervenció si està obert
             if(menuMap){
                 menuMap = false;
                 controlMap.classList.remove('open');
@@ -59,7 +60,7 @@ export function initTopbar(){
                 iconOptions.classList.toggle('fa-sliders-h', !menuOptions);
                 iconOptions.classList.toggle('fa-times', menuOptions);
                 toggleMenuOptionsBtn.classList.remove('rotating');
-            }, 150); // temps transició
+            }, 150); 
         
             controlOptions.classList.toggle('open', menuOptions);
             iconOptions.classList.toggle('fa-sliders-h', !menuOptions);

@@ -1,3 +1,5 @@
+// Menú lateral Opcions
+// Alarmes i selector posició menú Control Intervenció
 export function initSidebar(){
 
     document.addEventListener('DOMContentLoaded', ()=>{
@@ -12,7 +14,7 @@ export function initSidebar(){
 
         let minutsSeleccionats = 0;
 
-        // Setejador alarma minuts: Limitarem els temps màx. que un bomber pot estar a línterior de l'edifici amb una alarma.
+        // Setejador alarma minuts: Indica els temps màx. que un bomber pot estar a dins de l'edifici 
         minutsInputBtn.addEventListener('click', ()=>{
             const input = document.getElementById('minutsInput');
             const minutsSet = document.getElementById('minutsInputSet');
@@ -20,7 +22,7 @@ export function initSidebar(){
 
             if(!isNaN(valor) && valor >= 1 && valor <= 99){ // Valors: [1,..,99]                
                 minutsSeleccionats = valor;
-                // Marca el contorn de la casella en vermell
+                // Marca el contorn de la casella en roig
                 input.classList.add('highlight-red');
                 // Guarda el temps de l'alarma en un div ocult per ser llegit des d'on es necessiti
                 minutsSet.value = minutsSeleccionats;
@@ -43,9 +45,9 @@ export function initSidebar(){
             if(!isNaN(valor) && valor >= 0 && valor <= 100){ // Valors: [0,..,100]
                 
                 oxigenSeleccionats = valor;
-                // Marca el contorn de la casella en vermell
+                // Marca el contorn de la casella en roig
                 input.classList.add('highlight-red');
-                // Guardo el temps de l'alarma en un div ocult per ser llegit des d'on es necessiti
+                // Guarda el temps de l'alarma en un div ocult per ser llegit des d'on es necessiti
                 oxigenSet.value = oxigenSeleccionats;
                 console.log("% oxigen seleccionats:", oxigenSeleccionats);
             } 
@@ -56,7 +58,7 @@ export function initSidebar(){
         //---------------------------------------------------------
 
         let bpmSeleccionats = 0;
-        // Setejador alarma oxigen: Limitarem els % d'oxígen. mínim d'una botella
+        // Setejador alarma oxigen: Limita els % d'oxígen. mínim d'una botella
         bpmInputBtn.addEventListener('click', ()=>{
             const input = document.getElementById('bpmInput');
             const bpmSet = document.getElementById('bpmInputSet');
@@ -65,9 +67,9 @@ export function initSidebar(){
             if(!isNaN(valor) && valor >= 30 && valor <= 230){ // Valors: [30,..,230]
                 
                 bpmSeleccionats = valor;
-                // Marca el contorn de la casella en vermell
+                // Marca el contorn de la casella en roig
                 input.classList.add('highlight-red');
-                // Guardo el temps de l'alarma en un div ocult per ser llegit des d'on es necessiti
+                // Guarda el temps de l'alarma en un div ocult per ser llegit des d'on es necessiti
                 bpmSet.value = bpmSeleccionats;
                 console.log("bpm seleccionats:", bpmSeleccionats);
             } 
@@ -84,7 +86,7 @@ export function initSidebar(){
         });
 
 
-        // Tancar menú Opcions amb el botó X
+        // Tancar menú Opcions
         closeMenuOptions.addEventListener('click', ()=>{
 
             const toggleMenuOptionsBtn = document.getElementById('toggleMenuOptionsBtn');
